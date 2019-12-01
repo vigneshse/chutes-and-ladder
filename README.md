@@ -1,4 +1,4 @@
-** Chutes And Ladder **
+**Chutes And Ladder**
 
 Sample Input
 ------------
