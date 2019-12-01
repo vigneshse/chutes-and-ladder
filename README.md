@@ -1,12 +1,15 @@
-**Chutes And Ladder**
+Chutes And Ladder
+-----------------
 
 Sample Input
 ------------
 Enter Player Names below in the main method of ```ChutesAndLadders.java```:
+
 ```Game game = new Game(new String[]{"Eric", "Paul"});```
 
 Sample output
 -------------
+```
 1: Eric: 0 --> 5
 2: Paul: 0 --> 6
 3: Eric: 5 --> 10
