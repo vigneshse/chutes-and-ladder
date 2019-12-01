@@ -8,9 +8,9 @@ public class Game {
     private List<Player> players;
     private Board board;
     private Dice dice;
-    private int maxScore;
-    private long round;
     private LeaderBoard leaderBoard;
+    private int maxScore = 1;
+    private int round = 1;
 
     Game(String[] playerNames) throws IllegalArgumentException {
         validatePlayers(playerNames);
@@ -21,36 +21,49 @@ public class Game {
 
     public void play() {
         leaderBoard = new LeaderBoard();
-        while (maxScore < 100 || round < Long.MAX_VALUE - 1) {
+        while (maxScore < 100) {
             for (Player player : players) {
-                int currentScore = player.getScore();
+                int prevScore = player.getScore();
                 int faceValue = dice.roll();
-                int newScore = calculateScore(currentScore, faceValue);
+                int intermediaryScore = prevScore + faceValue;
+                int newScore = intermediaryScore;
+                calculateScore(newScore);
                 player.setScore(newScore);
                 if (maxScore < newScore) {
                     leaderBoard.setName(player.getName());
                     leaderBoard.setScore(newScore);
                     maxScore = newScore;
                 }
-                System.out.printf(round + ":'%2s'" , player + ":'%2s'" , currentScore + "'%2s'-->" , newScore);
+                if (isChute(intermediaryScore)) {
+                    System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + intermediaryScore + " --CHUTE--> " + newScore);
+                } else if (isLadder(intermediaryScore)) {
+                    System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + intermediaryScore + " --LADDER--> " + newScore);
+                }
+                System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + newScore);
                 round++;
             }
         }
+        System.out.printf("The winner is %s", leaderBoard.getName());
     }
 
-    private int calculateScore(int currentScore, int faceValue) {
-        int newScore = currentScore + faceValue;
+    private void calculateScore(int newScore) {
 
         // If the new score lands on Ladder Square
-        if (board.getLaddersMap().containsKey(newScore)) {
-            newScore += board.getLaddersMap().get(newScore);
+        if (isLadder(newScore)) {
+            newScore = board.getLaddersMap().get(newScore);
         }
         // If the new score lands on Chutes Square
-        else if (board.getChutesMap().containsKey(newScore)) {
-            newScore -= board.getChutesMap().get(newScore);
+        else if (isChute(newScore)) {
+            newScore = board.getChutesMap().get(newScore);
         }
+    }
 
-        return newScore;
+    private boolean isChute(int score) {
+        return board.getChutesMap().containsKey(score);
+    }
+
+    private boolean isLadder(int score) {
+        return board.getLaddersMap().containsKey(score);
     }
 
     private void createPlayers(String[] playerNames) {
