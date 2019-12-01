@@ -7,6 +7,7 @@ public class Board {
 
     private final Map<Integer, Integer> laddersMap = new HashMap<>();
     private final Map<Integer, Integer> chutesMap = new HashMap<>();
+    public final static int WINNING_NUMBER = 100;
 
     private static Board board = null;
 

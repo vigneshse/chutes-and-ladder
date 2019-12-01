@@ -9,7 +9,7 @@ public class Game {
     private Board board;
     private Dice dice;
     private LeaderBoard leaderBoard;
-    private int maxScore = 1;
+    private int maxScore = 0;
     private int round = 1;
 
     Game(String[] playerNames) throws IllegalArgumentException {
@@ -21,7 +21,7 @@ public class Game {
 
     public void play() {
         leaderBoard = new LeaderBoard();
-        while (maxScore < 100) {
+        while (maxScore < Board.WINNING_NUMBER) {
             for (Player player : players) {
                 int prevScore = player.getScore();
                 int faceValue = dice.roll();
@@ -38,9 +38,13 @@ public class Game {
                     System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + intermediaryScore + " --CHUTE--> " + newScore);
                 } else if (isLadder(intermediaryScore)) {
                     System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + intermediaryScore + " --LADDER--> " + newScore);
+                } else {
+                    System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + newScore);
                 }
-                System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + newScore);
                 round++;
+                if(maxScore >= Board.WINNING_NUMBER){
+                    break;
+                }
             }
         }
         System.out.printf("The winner is %s", leaderBoard.getName());
