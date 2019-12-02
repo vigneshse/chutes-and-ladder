@@ -1,5 +1,47 @@
+
+[![Build Status](https://travis-ci.org/vigneshse/chutes-and-ladder.svg?branch=master)](https://travis-ci.org/vigneshse/chutes-and-ladder)
+
 Chutes And Ladder
 -----------------
+
+Maven Java application for Chutes and Ladders Game.
+
+### Prerequisites
+
+Below pre-requisites are needed to run the application:
+
+```
+ JVM
+```
+
+## Project Tree
+
+Below is the package structure:
+```
+.
+├── README.md
+├── chutes-and-ladders.iml
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── game
+    │   │           └── assignment
+    │   │               ├── Board.java
+    │   │               ├── ChutesAndLadders.java
+    │   │               ├── Game.java
+    │   │               ├── LeaderBoard.java
+    │   │               ├── Player.java
+    │   │               └── Spinner.java
+    │   └── resources
+    └── test
+        └── java
+            └── com
+                └── game
+                    └── assignment
+                        └── SpinnerTest.java
+```
 
 Sample Input
 ------------
