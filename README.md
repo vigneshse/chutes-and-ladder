@@ -6,6 +6,10 @@ Chutes And Ladder
 
 Maven Java application for Chutes and Ladders Game.
 
+## Architecture
+
+![Flow Diagram](https://github.com/vigneshse/chutes-and-ladder/blob/master/Architecture.png)
+
 ### Execute Runnable JAR
 
 The runnable JAR of this application could be downloaded from AWS S3 location:
