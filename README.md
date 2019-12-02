@@ -6,11 +6,17 @@ Chutes And Ladder
 
 Maven Java application for Chutes and Ladders Game.
 
-### Runnable JAR
+### Execute Runnable JAR
 
 The runnable JAR of this application could be downloaded from AWS S3 location:
 
 [Download here]( https://vigneshse.s3-us-west-2.amazonaws.com/chutes-and-ladders.jar)
+
+Once downloaded, navigate to ~Downloads and run the following command:
+
+```
+    java -jar chutes-and-ladders.jar 
+```
 
 ### Project Tree
 
