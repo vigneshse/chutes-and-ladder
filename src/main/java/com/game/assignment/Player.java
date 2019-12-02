@@ -3,11 +3,9 @@ package com.game.assignment;
 public class Player {
 
     private String name;
-    private int score;
+    private int square;
 
-    Player(){
-
-    }
+    Player() { }
 
     Player(String name) {
         this.name = name;
@@ -21,19 +19,19 @@ public class Player {
         this.name = name;
     }
 
-    public int getScore() {
-        return score;
+    public int getSquare() {
+        return square;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setSquare(int square) {
+        this.square = square;
     }
 
     @Override
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                ", score=" + score +
+                ", square=" + square +
                 '}';
     }
 }

@@ -6,20 +6,20 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 
-public class DiceTest {
+public class SpinnerTest {
 
-    private Dice dice;
+    private Spinner spinner;
 
     @Before
     public void setUp() {
-        dice = new Dice();
+        spinner = new Spinner();
     }
 
     @Test
     public void roll() {
         int roll;
         for (int i = 0; i < 20; i++) {
-            roll = dice.roll();
+            roll = spinner.spin();
             assertTrue(1 <= roll && roll <= 7);
         }
     }

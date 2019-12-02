@@ -1,80 +1,153 @@
 package com.game.assignment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Game {
 
-    private List<Player> players;
+    public final static String CHUTE_LABEL = "CHUTE";
+    public final static String LADDER_LABEL = "LADDER";
+
+    private Player[] players;
     private Board board;
-    private Dice dice;
+    private Spinner spinner;
     private LeaderBoard leaderBoard;
-    private int maxScore = 0;
-    private int round = 1;
+    private int turn = 1;
 
     Game(String[] playerNames) throws IllegalArgumentException {
         validatePlayers(playerNames);
         createPlayers(playerNames);
         board = Board.load();
-        dice = new Dice();
+        spinner = new Spinner();
     }
 
     public void play() {
-        leaderBoard = new LeaderBoard();
-        while (maxScore < Board.WINNING_NUMBER) {
+
+        // Make the first move with highest draw
+        makeFirstMove();
+
+        while (!leaderBoard.isWinner()) {
             for (Player player : players) {
-                int prevScore = player.getScore();
-                int faceValue = dice.roll();
-                int intermediaryScore = prevScore + faceValue;
-                int newScore = intermediaryScore;
-                calculateScore(newScore);
-                player.setScore(newScore);
-                if (maxScore < newScore) {
-                    leaderBoard.setName(player.getName());
-                    leaderBoard.setScore(newScore);
-                    maxScore = newScore;
+
+                //Player spins
+                int draw = spinner.spin();
+
+                //Makes move
+                makeMove(player, draw);
+
+                //Maintain running leader of the game
+                if (leaderBoard.getSquare() < player.getSquare()) {
+                    updateLeaderBoard(player);
                 }
-                if (isChute(intermediaryScore)) {
-                    System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + intermediaryScore + " --CHUTE--> " + newScore);
-                } else if (isLadder(intermediaryScore)) {
-                    System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + intermediaryScore + " --LADDER--> " + newScore);
-                } else {
-                    System.out.println(round + ": " + player.getName() + ": " + prevScore + " --> " + newScore);
-                }
-                round++;
-                if(maxScore >= Board.WINNING_NUMBER){
+
+                // Stop as soon as there is a winner
+                if (leaderBoard.isWinner()) {
                     break;
                 }
+
+                //Increment Turn
+                turn++;
             }
         }
         System.out.printf("The winner is %s", leaderBoard.getName());
     }
 
-    private void calculateScore(int newScore) {
+    private void makeFirstMove() {
+        int highestPlayerIdx = electPlayerWithHighestDraw();
 
-        // If the new score lands on Ladder Square
-        if (isLadder(newScore)) {
-            newScore = board.getLaddersMap().get(newScore);
+        //Rearrange players only if the highest is not the first index in the array
+        if (highestPlayerIdx != 0) {
+            updatePlayerSequenceByHighestDraw(highestPlayerIdx);
         }
-        // If the new score lands on Chutes Square
-        else if (isChute(newScore)) {
-            newScore = board.getChutesMap().get(newScore);
+        leaderBoard = new LeaderBoard();
+        leaderBoard.setSquare(players[0].getSquare());
+        leaderBoard.setName(players[0].getName());
+    }
+
+    //  Eric, Paul, G, V
+    private int electPlayerWithHighestDraw() {
+        int highestDraw = Integer.MIN_VALUE;
+        int highestIndex = -1;
+        for (int i = 0; i < players.length; i++) {
+            int draw = spinner.spin();
+            if (highestDraw < draw) {
+                highestIndex = i;
+                highestDraw = draw;
+            }
+        }
+        players[highestIndex].setSquare(highestDraw);
+        return highestIndex;
+    }
+
+    private void updatePlayerSequenceByHighestDraw(int highestIndex) {
+        int playersLength = players.length;
+        for (int i = 0; i < highestIndex % playersLength; i++) {
+            Player tempPlayer = players[playersLength - 1];
+            for (int j = playersLength - 1; j > 0; j--) {
+                players[j] = players[j - 1];
+            }
+            players[0] = tempPlayer;
         }
     }
 
-    private boolean isChute(int score) {
-        return board.getChutesMap().containsKey(score);
+
+    private void makeMove(Player player, int draw) {
+
+        int prevSquare = player.getSquare();
+        int tempSquare = prevSquare + draw;
+
+        if (tempSquare <= 100) {
+            int newSquare = tempSquare;
+
+            // If the new score lands on Ladder Square
+            if (isLadderSquare(newSquare)) {
+                newSquare = board.getLaddersMap().get(newSquare);
+                displayMove(player.getName(), prevSquare, tempSquare, LADDER_LABEL, newSquare);
+            }
+            // If the new score lands on Chutes Square
+            else if (isChuteSquare(newSquare)) {
+                newSquare = board.getChutesMap().get(newSquare);
+                displayMove(player.getName(), prevSquare, tempSquare, CHUTE_LABEL, newSquare);
+            }
+            // Default new score
+            else {
+                displayMove(player.getName(), prevSquare, newSquare);
+            }
+
+            player.setSquare(newSquare);
+        }
     }
 
-    private boolean isLadder(int score) {
-        return board.getLaddersMap().containsKey(score);
+    private void updateLeaderBoard(Player player) {
+        leaderBoard.setName(player.getName());
+        leaderBoard.setSquare(player.getSquare());
+        if (isWinningSquare(player.getSquare())) {
+            leaderBoard.setWinner(true);
+        }
+    }
+
+    private void displayMove(String playerName, int prevSquare, int tempSquare, String type, int newSquare) {
+        System.out.println(turn + ": " + playerName + ": " + prevSquare + " --> " + tempSquare + " --" + type + "--> " + newSquare);
+    }
+
+    private void displayMove(String playerName, int prevSquare, int newSquare) {
+        System.out.println(turn + ": " + playerName + ": " + prevSquare + " --> " + newSquare);
+    }
+
+    private boolean isChuteSquare(int square) {
+        return board.getChutesMap().containsKey(square);
+    }
+
+    private boolean isLadderSquare(int square) {
+        return board.getLaddersMap().containsKey(square);
+    }
+
+    private boolean isWinningSquare(int square) {
+        return square == Board.WINNING_NUMBER;
     }
 
     private void createPlayers(String[] playerNames) {
-        this.players = new ArrayList<>(playerNames.length);
-        for (String playerName : playerNames) {
-            Player player = new Player(playerName);
-            this.players.add(player);
+        this.players = new Player[playerNames.length];
+        for (int i = 0; i < playerNames.length; i++) {
+            Player player = new Player(playerNames[i]);
+            this.players[i] = player;
         }
     }
 
