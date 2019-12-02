@@ -52,24 +52,49 @@ Enter Player Names in the main method of ```ChutesAndLadders.java```:
 Sample output
 -------------
 ```
-1: Paul: 6 --> 11
-2: Eric: 0 --> 3
-3: Paul: 11 --> 14
-4: Eric: 3 --> 9 --LADDER--> 31
-5: Paul: 14 --> 19
-6: Eric: 31 --> 37
-7: Paul: 19 --> 21 --LADDER--> 42
-8: Eric: 37 --> 42
-9: Paul: 42 --> 47 --CHUTE--> 26
-10: Eric: 42 --> 46
-11: Paul: 26 --> 27
-12: Eric: 46 --> 51 --LADDER--> 67
-13: Paul: 27 --> 32
-14: Eric: 67 --> 68
-15: Paul: 32 --> 36 --LADDER--> 44
-16: Eric: 68 --> 74
-17: Paul: 44 --> 48
-18: Eric: 74 --> 76
-19: Paul: 48 --> 54
-20: Eric: 76 --> 80 --LADDER--> 100
+1: Eric: 0 --> 6
+2: Paul: 0 --> 5
+3: Eric: 6 --> 8
+4: Paul: 5 --> 6
+5: Eric: 8 --> 11
+6: Paul: 6 --> 7
+7: Eric: 11 --> 14
+8: Paul: 7 --> 13
+9: Eric: 14 --> 18
+10: Paul: 13 --> 15
+11: Eric: 18 --> 21 --LADDER--> 42
+12: Paul: 15 --> 21 --LADDER--> 42
+13: Eric: 42 --> 48
+14: Paul: 42 --> 44
+15: Eric: 48 --> 52
+16: Paul: 44 --> 50
+17: Eric: 52 --> 55
+18: Paul: 50 --> 56 --CHUTE--> 53
+19: Eric: 55 --> 59
+20: Paul: 53 --> 55
+21: Eric: 59 --> 61
+22: Paul: 55 --> 57
+23: Eric: 61 --> 64 --CHUTE--> 60
+24: Paul: 57 --> 62 --CHUTE--> 19
+25: Eric: 60 --> 66
+26: Paul: 19 --> 22
+27: Eric: 66 --> 71 --LADDER--> 91
+28: Paul: 22 --> 25
+29: Eric: 91 --> 93 --CHUTE--> 73
+30: Paul: 25 --> 27
+31: Eric: 73 --> 79
+32: Paul: 27 --> 32
+33: Eric: 79 --> 83
+34: Paul: 32 --> 35
+35: Eric: 83 --> 88
+36: Paul: 35 --> 38
+37: Eric: 88 --> 93 --CHUTE--> 73
+38: Paul: 38 --> 42
+39: Eric: 73 --> 74
+40: Paul: 42 --> 48
+41: Eric: 74 --> 77
+42: Paul: 48 --> 52
+43: Eric: 77 --> 79
+44: Paul: 52 --> 54
+45: Eric: 79 --> 80 --LADDER--> 100
 The winner is Eric

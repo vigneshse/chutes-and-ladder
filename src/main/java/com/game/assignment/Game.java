@@ -68,7 +68,6 @@ public class Game {
                 highestDraw = draw;
             }
         }
-        players[highestIndex].setSquare(highestDraw);
         return highestIndex;
     }
 
@@ -88,7 +87,7 @@ public class Game {
 
         int prevSquare = player.getSquare();
         int newSquare = prevSquare + draw;
-        int upOrDownSquare;
+        int upOrDownSquare = 0;
 
         if (newSquare <= WINNING_NUMBER) {
 
@@ -106,7 +105,13 @@ public class Game {
             else {
                 displayMove(player.getName(), prevSquare, newSquare);
             }
-            player.setSquare(newSquare);
+
+            //Set player new Square based on move
+            if (upOrDownSquare > 0) {
+                player.setSquare(upOrDownSquare);
+            } else {
+                player.setSquare(newSquare);
+            }
         }
     }
 
