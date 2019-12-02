@@ -20,6 +20,6 @@ deploy:
   file: "${RELEASE_JAR_FILE}"
   skip_cleanup: true
   on:
-    repo: [chutes-and-ladder]
-    tags: true
-    all_branches: true
+    repo: chutes-and-ladder
+    tags: false
+    branch: master
