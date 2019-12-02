@@ -3,7 +3,7 @@ sudo:
 language:
   java
 jdk:
-  openjdk10
+  openjdk11
 script:
   - export JAVA_HOME=$HOME/openjdk11
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
