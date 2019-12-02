@@ -15,7 +15,7 @@ before_deploy:
   - echo "Deploying $RELEASE_JAR_FILE to GitHub"
 deploy:
   provider: releases
-  api_key: c6372925399b46d5d587268abd8ea34a678a93c2
+  api_key: $GITHUB_TOKEN
   file_glob: true
   file: "${RELEASE_JAR_FILE}"
   skip_cleanup: true
