@@ -8,11 +8,14 @@ branches:
 script:
 - mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_deploy:
-- echo "Deploying jar file to GitHub"
+- echo "Deploying jar file to S3"
 deploy:
-  provider: releases
-  api_key:
-    secure: jj7+CTY0KXCSY84BJrstSwcabeCv+slj0L8m2wLhm2rucCUTUPLIyEsnsLoXu/2jjj8z3JcJAg+bsRQL41BAqtjlrT/UnG8bBbCcJQNkBmTSGUhdGtDOf/O5kLZG9QyeBONWJYlVxNiUJGVNgBwgVMC2RGk2FDH1tc93jjC/Lm88vSn0hmqJG++uSO2ud0r0mZN5KBJQixoFIrpWqi3TAVQ7FME9l4j1R92Xv7u8Hgb7dxmllZaa8rZlae9frdfqvmbwElk56p5jIgYu/Qe5WnltU3zeTJO/3EHdtpq5ba/uwe++LjMBVNSsBtG4iDxBsjRDfZVRCy+mCy6n5HLJ4bOOf9PZBZi/EWN76OR2olciKGsYP3W+rX4Iw/bh8pGOLgMlt4PpAdLn25DXBv7JxCUdZQyuFcA5/rNoE3UgXrVuXoVpC66pvtdcWTw94foOg8vVpmMhh8/tZG+vfGBe4cOq514x0+3B8tsl42M+dH9rjx8wxrvyn85J11Qx1XIxU9acA13xlWFtBtwdnD9eLRB55mWM6UGAgqbZSPQQUw359cduLIKROCXPnB6AIDiZ1VY5BDaKOeQo9I475Dl/UehhXKOuc3KHgSkGK6j0RBisN9DMYgInPlMy6a+OUiiLSOhGcKioceSYvFi0Atn/1rrFvQEy5tdUwnG3wbN5D+k=
-  file: "/home/travis/build/vigneshse/chutes-and-ladder/target/*.jar"
+  provider: s3
+  access_key_id: AKIA3MN3Z52KP2RWYKOY
+  secret_access_key:
+    secure: WgXU37wmqoLVogMsJ/EfDIndnUxrUKUSpApQFo2pKjzNqQ409f987MO/PKD04GmZhGgXCewQPb22Tex/GUK0vIRMIdb38uTpCvqxHPXy8viejAK70m3Bpq++fn8B52yDEHnKbEkUoCXnx8M6nLqhuYrDjHEznZDtQyhI0rEEH6i2i3OsBdRCWjrv4OcG1ZTy/P3sPy3aPqui4q0Lz9yhN3OZ/59W1Us3giEPcdKiSQpnCqqfA5pKW2JPcRaD024zv0T+ZZDIqrdGR5pitoqAdoOCLJPlG5yShhqtfnADJEIzGempl6k66xMuqYAGiKjFK2bkOTt7d7ebwXMEBdEbCbKGVe7YcfmOLn4CUE1XwH5cXJ64CMELEfJT/APa1xSYZ6Z6NHPvVAa80JHRYtxv2F7M2iAbmBpauEdAh3/JlBrAk9sBqJjFq+uLPeM5Y1dDOHhsQzjV5OrwCnO+2E8W3p7jYUHr5gr4ZwKd28tV7qg3tfTJlmc+Xtv69Cq2Dun9sWb/8jWLOx7m5GJbt9RvuUOm3NkB+iFzXuF2MXoo2AhweWJuPUU0GHArWJwxdAnHShie8FpFWQrh3IRu4X0uQ8RDMQF8aclcGMkWpRw8wqfV+3WlG+i5aOFH5jk37Mp0nK78YRtERQ6ud4fB382Q9AYhRbVuwL/co0YZJEbh+/8=
+  bucket: '"S3 Bucket"'
+  local-dir: target
+  acl: public_read
   on:
     repo: vigneshse/chutes-and-ladder
