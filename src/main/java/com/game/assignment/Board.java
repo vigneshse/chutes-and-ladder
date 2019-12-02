@@ -5,31 +5,45 @@ import java.util.Map;
 
 public class Board {
 
-    private final Map<Integer, Integer> laddersMap = new HashMap<>();
-    private final Map<Integer, Integer> chutesMap = new HashMap<>();
     public final static int WINNING_NUMBER = 100;
+    public final static String CHUTE_LABEL = "CHUTE";
+    public final static String LADDER_LABEL = "LADDER";
 
-    private static Board board = null;
+    private static final Map<Integer, Integer> laddersMap = new HashMap<>();
+    private static final Map<Integer, Integer> chutesMap = new HashMap<>();
 
-    public static Board load() {
-        if (board == null) {
-            board = new Board();
-            board.populateLaddersMap();
-            board.populateChutesMap();
+    static {
+        populateChutesMap();
+        populateLaddersMap();
+    }
+
+    public static int getLadderValueByKey(int key) {
+        if (!laddersMap.containsKey(key)) {
+            throw new IllegalArgumentException("Key not found");
         }
-        return board;
+        return laddersMap.get(key);
     }
 
-    public Map<Integer, Integer> getLaddersMap() {
-        return laddersMap;
+    public static int getChuteValueByKey(int key) {
+        if (!chutesMap.containsKey(key)) {
+            throw new IllegalArgumentException("Key not found");
+        }
+        return chutesMap.get(key);
     }
 
-    public Map<Integer, Integer> getChutesMap() {
-        return chutesMap;
+    public static boolean isChuteSquare(int square) {
+        return chutesMap.containsKey(square);
     }
 
+    public static boolean isLadderSquare(int square) {
+        return laddersMap.containsKey(square);
+    }
 
-    private void populateLaddersMap() {
+    public static boolean isWinningSquare(int square) {
+        return WINNING_NUMBER == square;
+    }
+
+    private static void populateLaddersMap() {
         laddersMap.put(1, 38);
         laddersMap.put(4, 14);
         laddersMap.put(9, 31);
@@ -41,7 +55,7 @@ public class Board {
         laddersMap.put(80, 100);
     }
 
-    private void populateChutesMap() {
+    private static void populateChutesMap() {
         chutesMap.put(98, 78);
         chutesMap.put(95, 75);
         chutesMap.put(93, 73);

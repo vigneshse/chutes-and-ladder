@@ -1,12 +1,10 @@
 package com.game.assignment;
 
+import static com.game.assignment.Board.*;
+
 public class Game {
 
-    public final static String CHUTE_LABEL = "CHUTE";
-    public final static String LADDER_LABEL = "LADDER";
-
     private Player[] players;
-    private Board board;
     private Spinner spinner;
     private LeaderBoard leaderBoard;
     private int turn = 1;
@@ -14,7 +12,6 @@ public class Game {
     Game(String[] playerNames) throws IllegalArgumentException {
         validatePlayers(playerNames);
         createPlayers(playerNames);
-        board = Board.load();
         spinner = new Spinner();
     }
 
@@ -61,7 +58,6 @@ public class Game {
         leaderBoard.setName(players[0].getName());
     }
 
-    //  Eric, Paul, G, V
     private int electPlayerWithHighestDraw() {
         int highestDraw = Integer.MIN_VALUE;
         int highestIndex = -1;
@@ -91,26 +87,25 @@ public class Game {
     private void makeMove(Player player, int draw) {
 
         int prevSquare = player.getSquare();
-        int tempSquare = prevSquare + draw;
+        int newSquare = prevSquare + draw;
+        int upOrDownSquare;
 
-        if (tempSquare <= 100) {
-            int newSquare = tempSquare;
+        if (newSquare <= WINNING_NUMBER) {
 
             // If the new score lands on Ladder Square
             if (isLadderSquare(newSquare)) {
-                newSquare = board.getLaddersMap().get(newSquare);
-                displayMove(player.getName(), prevSquare, tempSquare, LADDER_LABEL, newSquare);
+                upOrDownSquare = getLadderValueByKey(newSquare);
+                displayMove(player.getName(), prevSquare, newSquare, LADDER_LABEL, upOrDownSquare);
             }
             // If the new score lands on Chutes Square
             else if (isChuteSquare(newSquare)) {
-                newSquare = board.getChutesMap().get(newSquare);
-                displayMove(player.getName(), prevSquare, tempSquare, CHUTE_LABEL, newSquare);
+                upOrDownSquare = getChuteValueByKey(newSquare);
+                displayMove(player.getName(), prevSquare, newSquare, CHUTE_LABEL, upOrDownSquare);
             }
             // Default new score
             else {
                 displayMove(player.getName(), prevSquare, newSquare);
             }
-
             player.setSquare(newSquare);
         }
     }
@@ -129,18 +124,6 @@ public class Game {
 
     private void displayMove(String playerName, int prevSquare, int newSquare) {
         System.out.println(turn + ": " + playerName + ": " + prevSquare + " --> " + newSquare);
-    }
-
-    private boolean isChuteSquare(int square) {
-        return board.getChutesMap().containsKey(square);
-    }
-
-    private boolean isLadderSquare(int square) {
-        return board.getLaddersMap().containsKey(square);
-    }
-
-    private boolean isWinningSquare(int square) {
-        return square == Board.WINNING_NUMBER;
     }
 
     private void createPlayers(String[] playerNames) {
