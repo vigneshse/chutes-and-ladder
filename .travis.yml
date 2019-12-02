@@ -4,12 +4,22 @@ language:
   java
 jdk:
   openjdk11
+branches:
+  only:
+    - master
+    - /v\d+\.\d+[a-z]/
 script:
   - mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+before_deploy:
+  - export RELEASE_JAR_FILE=$(ls /home/travis/build/vigneshse/chutes-and-ladder/target/*.jar)
+  - echo "Deploying $RELEASE_JAR_FILE to GitHub"
 deploy:
   provider: releases
   api_key: c6372925399b46d5d587268abd8ea34a678a93c2
-  file: ~/target/chutes-and-ladders-1.0-SNAPSHOT.jar
+  file_glob: true
+  file: "${RELEASE_JAR_FILE}"
   skip_cleanup: true
   on:
+    repo: [my-repo]
     tags: true
+    all_branches: true
