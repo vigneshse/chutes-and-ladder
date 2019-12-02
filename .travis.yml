@@ -15,7 +15,7 @@ deploy:
   secret_access_key:
     secure: WgXU37wmqoLVogMsJ/EfDIndnUxrUKUSpApQFo2pKjzNqQ409f987MO/PKD04GmZhGgXCewQPb22Tex/GUK0vIRMIdb38uTpCvqxHPXy8viejAK70m3Bpq++fn8B52yDEHnKbEkUoCXnx8M6nLqhuYrDjHEznZDtQyhI0rEEH6i2i3OsBdRCWjrv4OcG1ZTy/P3sPy3aPqui4q0Lz9yhN3OZ/59W1Us3giEPcdKiSQpnCqqfA5pKW2JPcRaD024zv0T+ZZDIqrdGR5pitoqAdoOCLJPlG5yShhqtfnADJEIzGempl6k66xMuqYAGiKjFK2bkOTt7d7ebwXMEBdEbCbKGVe7YcfmOLn4CUE1XwH5cXJ64CMELEfJT/APa1xSYZ6Z6NHPvVAa80JHRYtxv2F7M2iAbmBpauEdAh3/JlBrAk9sBqJjFq+uLPeM5Y1dDOHhsQzjV5OrwCnO+2E8W3p7jYUHr5gr4ZwKd28tV7qg3tfTJlmc+Xtv69Cq2Dun9sWb/8jWLOx7m5GJbt9RvuUOm3NkB+iFzXuF2MXoo2AhweWJuPUU0GHArWJwxdAnHShie8FpFWQrh3IRu4X0uQ8RDMQF8aclcGMkWpRw8wqfV+3WlG+i5aOFH5jk37Mp0nK78YRtERQ6ud4fB382Q9AYhRbVuwL/co0YZJEbh+/8=
   bucket: '"S3 Bucket"'
-  local-dir: /home/travis/build/vigneshse/chutes-and-ladder/target
+  #local-dir: /home/travis/build/vigneshse/chutes-and-ladder/target
   acl: public_read
   on:
     repo: vigneshse/chutes-and-ladder
