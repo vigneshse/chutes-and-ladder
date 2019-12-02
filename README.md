@@ -47,11 +47,15 @@ Sample Input
 ------------
 Enter Player Names in the main method of ```ChutesAndLadders.java```:
 
-```Game game = new Game(new String[]{"Eric", "Paul"});```
+## Two Players
+```String[] players = {"Eric", "Paul"};```
+
+## Four Players
+```String[] players = {"Eric", "Paul", "Katy", "Carrie"};```
 
 Sample output
 -------------
-# Two Players
+## Two Players
 ```
 1: Eric: 0 --> 6
 2: Paul: 0 --> 5
@@ -101,7 +105,7 @@ Sample output
 The winner is Eric
 ```
 
-# Four Players
+## Four Players
 
 ```
 1: Carrie: 0 --> 4 --LADDER--> 14
