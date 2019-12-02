@@ -5,4 +5,4 @@ language:
 jdk:
   openjdk11
 script:
-  - mvn package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
