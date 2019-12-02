@@ -1,25 +1,18 @@
-sudo:
-  required
-language:
-  java
-jdk:
-  openjdk11
+sudo: required
+language: java
+jdk: openjdk11
 branches:
   only:
-    - master
-    - /v\d+\.\d+[a-z]/
+  - master
+  - "/v\\d+\\.\\d+[a-z]/"
 script:
-  - mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 before_deploy:
-  - export RELEASE_JAR_FILE=$(ls /home/travis/build/vigneshse/chutes-and-ladder/target/*.jar)
-  - echo "Deploying $RELEASE_JAR_FILE to GitHub"
+- echo "Deploying jar file to GitHub"
 deploy:
   provider: releases
-  api_key: "${GITHUB_TOKEN}"
-  file_glob: true
-  file: "${RELEASE_JAR_FILE}"
-  skip_cleanup: true
+  api_key:
+    secure: jj7+CTY0KXCSY84BJrstSwcabeCv+slj0L8m2wLhm2rucCUTUPLIyEsnsLoXu/2jjj8z3JcJAg+bsRQL41BAqtjlrT/UnG8bBbCcJQNkBmTSGUhdGtDOf/O5kLZG9QyeBONWJYlVxNiUJGVNgBwgVMC2RGk2FDH1tc93jjC/Lm88vSn0hmqJG++uSO2ud0r0mZN5KBJQixoFIrpWqi3TAVQ7FME9l4j1R92Xv7u8Hgb7dxmllZaa8rZlae9frdfqvmbwElk56p5jIgYu/Qe5WnltU3zeTJO/3EHdtpq5ba/uwe++LjMBVNSsBtG4iDxBsjRDfZVRCy+mCy6n5HLJ4bOOf9PZBZi/EWN76OR2olciKGsYP3W+rX4Iw/bh8pGOLgMlt4PpAdLn25DXBv7JxCUdZQyuFcA5/rNoE3UgXrVuXoVpC66pvtdcWTw94foOg8vVpmMhh8/tZG+vfGBe4cOq514x0+3B8tsl42M+dH9rjx8wxrvyn85J11Qx1XIxU9acA13xlWFtBtwdnD9eLRB55mWM6UGAgqbZSPQQUw359cduLIKROCXPnB6AIDiZ1VY5BDaKOeQo9I475Dl/UehhXKOuc3KHgSkGK6j0RBisN9DMYgInPlMy6a+OUiiLSOhGcKioceSYvFi0Atn/1rrFvQEy5tdUwnG3wbN5D+k=
+  file: "/home/travis/build/vigneshse/chutes-and-ladder/target/*.jar"
   on:
     repo: vigneshse/chutes-and-ladder
-    tags: false
-    branch: master
