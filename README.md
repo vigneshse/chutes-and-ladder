@@ -52,10 +52,18 @@ Sample Input
 Enter Player Names in the main method of ```ChutesAndLadders.java```:
 
 #### Two Players
-```String[] players = {"Eric", "Paul"};```
+```------------------------------------------------
+           WELCOME TO CHUTES AND LADDER!
+   -------------------------------------------------
+   Enter the name of players in comma-separated values [2 or more]: Eric, Paul
+```
 
 #### Four Players
-```String[] players = {"Eric", "Paul", "Katy", "Carrie"};```
+```------------------------------------------------
+           WELCOME TO CHUTES AND LADDER!
+   -------------------------------------------------
+   Enter the name of players in comma-separated values [2 or more]: Eric, Paul, Katy, Carrie
+```
 
 Sample output
 -------------
@@ -107,6 +115,9 @@ Sample output
 44: Paul: 52 --> 54
 45: Eric: 79 --> 80 --LADDER--> 100
 The winner is Eric
+GAME OVER!
+Wish to play again? [Y / N]:
+
 ```
 
 #### Four Players
@@ -217,4 +228,7 @@ The winner is Eric
 103: Paul: 84 --> 87 --CHUTE--> 24
 104: Katy: 96 --> 100
 The winner is Katy
+GAME OVER!
+Wish to play again? [Y / N]:
+
 ```
