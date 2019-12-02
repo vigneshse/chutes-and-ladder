@@ -4,7 +4,9 @@
 Chutes And Ladder
 -----------------
 
-Maven Java application for Chutes and Ladders Game.
+Maven Java application to simulate the classic Children's game "Chutes and Ladders"
+
+![Board Image](https://github.com/vigneshse/chutes-and-ladder/blob/master/Chutes_Ladder_Board.jpg)
 
 ## Architecture
 
