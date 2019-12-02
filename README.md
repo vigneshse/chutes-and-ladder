@@ -6,12 +6,12 @@ Chutes And Ladder
 
 Maven Java application for Chutes and Ladders Game.
 
-### Prerequisites
+### Runnable JAR
 
-Below pre-requisites are needed to run the application:
+The runnable JAR of this application could be downloaded from AWS S3 location:
 
 ```
- JVM
+ https://vigneshse.s3-us-west-2.amazonaws.com/chutes-and-ladders.jar
 ```
 
 ### Project Tree
