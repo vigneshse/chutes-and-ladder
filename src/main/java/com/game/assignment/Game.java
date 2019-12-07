@@ -1,6 +1,13 @@
 package com.game.assignment;
 
-import static com.game.assignment.Board.*;
+import static com.game.assignment.Board.CHUTE_LABEL;
+import static com.game.assignment.Board.LADDER_LABEL;
+import static com.game.assignment.Board.WINNING_NUMBER;
+import static com.game.assignment.Board.getChuteValueByKey;
+import static com.game.assignment.Board.getLadderValueByKey;
+import static com.game.assignment.Board.isChuteSquare;
+import static com.game.assignment.Board.isLadderSquare;
+import static com.game.assignment.Board.isWinningSquare;
 
 public class Game {
 
@@ -9,9 +16,9 @@ public class Game {
     private LeaderBoard leaderBoard;
     private int turn = 1; // Defaulting to 1, as turn starts from 1
 
-    Game(String[] playerNames) throws IllegalArgumentException {
-        validatePlayers(playerNames);
-        createPlayers(playerNames);
+    Game(Player[] players) throws IllegalArgumentException {
+        validateMinimumNumberOfPlayers(players);
+        this.players = players;
         spinner = new Spinner();
     }
 
@@ -46,6 +53,12 @@ public class Game {
         System.out.printf("The winner is %s", leaderBoard.getName());
     }
 
+    private static void validateMinimumNumberOfPlayers(Player[] playerNames) {
+        if (playerNames == null || playerNames.length <= 1) {
+            throw new IllegalArgumentException("Invalid no. of players. Must be minimum 2 players");
+        }
+    }
+
     private void makeFirstMove() {
         int highestPlayerIdx = electPlayerWithHighestDraw();
 
@@ -53,9 +66,8 @@ public class Game {
         if (highestPlayerIdx != 0) {
             updatePlayerSequenceByHighestDraw(highestPlayerIdx);
         }
-        leaderBoard = new LeaderBoard();
+        leaderBoard = new LeaderBoard(players[0].getName());
         leaderBoard.setSquare(players[0].getSquare());
-        leaderBoard.setName(players[0].getName());
     }
 
     //Helper method to spin and pick the highest draw so that the game can start
@@ -74,6 +86,7 @@ public class Game {
 
     private void updatePlayerSequenceByHighestDraw(int highestIndex) {
         int playersLength = players.length;
+        //Rotate the array to set the player sequence
         for (int i = 0; i < highestIndex % playersLength; i++) {
             Player tempPlayer = players[playersLength - 1];
             for (int j = playersLength - 1; j > 0; j--) {
@@ -128,33 +141,11 @@ public class Game {
     //Display scores
     //TODO Replace SOPs with log statements - to be appended to a file.
     private void displayMove(String playerName, int prevSquare, int tempSquare, String type, int newSquare) {
-        System.out.println(turn + ": " + playerName + ": " + prevSquare + " --> " + tempSquare + " --" + type + "--> " + newSquare);
+        System.out.println(turn + ": " + playerName + ": " + prevSquare + " --> " + tempSquare + " --" + type + "--> " +
+                           newSquare);
     }
 
     private void displayMove(String playerName, int prevSquare, int newSquare) {
         System.out.println(turn + ": " + playerName + ": " + prevSquare + " --> " + newSquare);
-    }
-
-    //Creates player objects based on the user input
-    private void createPlayers(String[] playerNames) {
-        this.players = new Player[playerNames.length];
-        for (int i = 0; i < playerNames.length; i++) {
-            Player player = new Player(playerNames[i]);
-            this.players[i] = player;
-        }
-    }
-
-    // Validate the minimum number of players and the player names
-    //TODO Deeper Name Validation - only allow Alphabets and Accentuated characters, no digits allowed
-    //TODO Validate maximum number of players, currently no check on max players
-    private void validatePlayers(String[] players) throws IllegalArgumentException {
-        if (players == null || players.length <= 1) {
-            throw new IllegalArgumentException("Invalid no. of players. Must be minimum 2 players");
-        }
-        for (String player : players) {
-            if (player == null || player.isBlank()) {
-                throw new IllegalArgumentException("Player name(s) cannot be blank");
-            }
-        }
     }
 }

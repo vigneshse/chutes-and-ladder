@@ -5,7 +5,9 @@ public class LeaderBoard extends Player {
 
     private boolean winner = false;
 
-    LeaderBoard(){ }
+    LeaderBoard(String name) {
+        super(name);
+    }
 
     public boolean isWinner() {
         return winner;
