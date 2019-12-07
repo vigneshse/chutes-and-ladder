@@ -6,8 +6,7 @@ Chutes And Ladder
 
 Maven Java application to simulate the classic Children's game "Chutes and Ladders"
 
-
-##Assumptions
+## Assumptions
     - Minimum 2 players are required to play the game
     - The game is always started by spinning the maximum draw and the player who gets the highest draw gets to spin
      first and continues from that sequence.
