@@ -53,6 +53,7 @@ public class Game {
         System.out.printf("The winner is %s", leaderBoard.getName());
     }
 
+    //TODO Validate maximum number of players, currently no check on max players.
     private static void validateMinimumNumberOfPlayers(Player[] playerNames) {
         if (playerNames == null || playerNames.length <= 1) {
             throw new IllegalArgumentException("Invalid no. of players. Must be minimum 2 players");

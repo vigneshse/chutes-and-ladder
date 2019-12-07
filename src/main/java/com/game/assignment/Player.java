@@ -36,7 +36,6 @@ public class Player {
 
     // Validate the minimum number of players and the player names
     //TODO Deeper Name Validation - only allow Alphabets and Accentuated characters, no digits allowed
-    //TODO Validate maximum number of players, currently no check on max players
     private void validatePlayerNames(String player) throws IllegalArgumentException {
         if (player == null || player.isBlank()) {
             throw new IllegalArgumentException("Player name(s) cannot be blank");
