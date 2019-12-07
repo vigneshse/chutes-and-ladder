@@ -5,7 +5,7 @@
 Chutes And Ladder
 -----------------
 
-Maven Java application to simulate the classic Children's game "Chutes and Ladders"
+Java application to simulate the classic Children's game "Chutes and Ladders"
 
 ## Assumptions
     - Minimum 2 players are required to play the game
@@ -67,7 +67,7 @@ Below is the package structure:
 
 Sample Input
 ------------
-Enter Player Names in the main method of ```ChutesAndLadders.java```:
+Enter Player Names as below when running main method of ```ChutesAndLadders.java```:
 
 #### Two Players
 ```------------------------------------------------
