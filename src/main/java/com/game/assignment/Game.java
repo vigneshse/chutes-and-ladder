@@ -7,7 +7,7 @@ public class Game {
     private Player[] players;
     private Spinner spinner;
     private LeaderBoard leaderBoard;
-    private int turn = 1;
+    private int turn = 1; // Defaulting to 1, as turn starts from 1
 
     Game(String[] playerNames) throws IllegalArgumentException {
         validatePlayers(playerNames);
@@ -58,6 +58,7 @@ public class Game {
         leaderBoard.setName(players[0].getName());
     }
 
+    //Helper method to spin and pick the highest draw so that the game can start
     private int electPlayerWithHighestDraw() {
         int highestDraw = Integer.MIN_VALUE;
         int highestIndex = -1;
@@ -91,22 +92,22 @@ public class Game {
 
         if (newSquare <= WINNING_NUMBER) {
 
-            // If the new score lands on Ladder Square
+            // If the pawn lands on Ladder Square
             if (isLadderSquare(newSquare)) {
                 upOrDownSquare = getLadderValueByKey(newSquare);
                 displayMove(player.getName(), prevSquare, newSquare, LADDER_LABEL, upOrDownSquare);
             }
-            // If the new score lands on Chutes Square
+            // If the pawn lands on Chutes Square
             else if (isChuteSquare(newSquare)) {
                 upOrDownSquare = getChuteValueByKey(newSquare);
                 displayMove(player.getName(), prevSquare, newSquare, CHUTE_LABEL, upOrDownSquare);
             }
-            // Default new score
+            // Default new move
             else {
                 displayMove(player.getName(), prevSquare, newSquare);
             }
 
-            //Set player new Square based on move
+            //Update player's square based on move
             if (upOrDownSquare > 0) {
                 player.setSquare(upOrDownSquare);
             } else {
@@ -115,6 +116,7 @@ public class Game {
         }
     }
 
+    //Maintain the current leading player as the game progresses
     private void updateLeaderBoard(Player player) {
         leaderBoard.setName(player.getName());
         leaderBoard.setSquare(player.getSquare());
@@ -123,6 +125,8 @@ public class Game {
         }
     }
 
+    //Display scores
+    //TODO Replace SOPs with log statements - to be appended to a file.
     private void displayMove(String playerName, int prevSquare, int tempSquare, String type, int newSquare) {
         System.out.println(turn + ": " + playerName + ": " + prevSquare + " --> " + tempSquare + " --" + type + "--> " + newSquare);
     }
@@ -131,6 +135,7 @@ public class Game {
         System.out.println(turn + ": " + playerName + ": " + prevSquare + " --> " + newSquare);
     }
 
+    //Creates player objects based on the user input
     private void createPlayers(String[] playerNames) {
         this.players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++) {
@@ -139,6 +144,9 @@ public class Game {
         }
     }
 
+    // Validate the minimum number of players and the player names
+    //TODO Deeper Name Validation - only allow Alphabets and Accentuated characters, no digits allowed
+    //TODO Validate maximum number of players, currently no check on max players
     private void validatePlayers(String[] players) throws IllegalArgumentException {
         if (players == null || players.length <= 1) {
             throw new IllegalArgumentException("Invalid no. of players. Must be minimum 2 players");

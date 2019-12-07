@@ -17,9 +17,8 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.release>11</maven.compiler.release>
         <source.jdk.version>11</source.jdk.version>
-        <target.jdk.version>8</target.jdk.version>
+        <target.jdk.version>11</target.jdk.version>
     </properties>
 
     <build>

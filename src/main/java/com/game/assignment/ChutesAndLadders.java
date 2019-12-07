@@ -8,7 +8,10 @@ public class ChutesAndLadders {
 
         char repeat = 'Y';
 
+        // Option for the players to continue to play once the game is over.
         while ('Y' == repeat || 'y' == repeat) {
+
+            //Get inputs (player names) from the user
             Scanner sc = new Scanner(System.in);
             String[] players;
 
@@ -26,6 +29,7 @@ public class ChutesAndLadders {
                 continue;
             }
 
+            //Creates a game and play begins
             Game game = new Game(players);
             game.play();
 

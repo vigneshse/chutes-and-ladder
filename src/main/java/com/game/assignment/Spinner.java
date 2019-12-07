@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Spinner {
 
+    //TODO Min & Max Possible values to be extracted to properties file
     private final int MAX_FACE_VALUE = 6;
     private final int MIN_FACE_VALUE = 1;
 

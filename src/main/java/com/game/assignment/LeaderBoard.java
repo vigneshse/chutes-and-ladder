@@ -1,15 +1,11 @@
 package com.game.assignment;
 
+
 public class LeaderBoard extends Player {
 
     private boolean winner = false;
 
-    LeaderBoard(String name) {
-        super(name);
-    }
-    LeaderBoard(){
-
-    }
+    LeaderBoard(){ }
 
     public boolean isWinner() {
         return winner;

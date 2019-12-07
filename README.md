@@ -6,11 +6,25 @@ Chutes And Ladder
 
 Maven Java application to simulate the classic Children's game "Chutes and Ladders"
 
+
+##Assumptions
+    - Minimum 2 players are required to play the game
+    - The game is always started by spinning the maximum draw and the player who gets the highest draw gets to spin
+     first and continues from that sequence.
+    - If no player spins the desired number to finish the game, the turn could keep going infinetly. Could be an
+     enhancement to end the game after certain number of turns and elect the winner who is closest to the Winning Square
+
 ![Board Image](https://github.com/vigneshse/chutes-and-ladder/blob/master/Chutes_Ladder_Board.jpg)
 
 ## Architecture
 
 ![Flow Diagram](https://github.com/vigneshse/chutes-and-ladder/blob/master/Architecture.png)
+
+## Pre-requisite
+
+To run the JAR make sure you have the following items installed:
+
+```JRE/JDK 11```
 
 ### Execute Runnable JAR
 
@@ -29,27 +43,25 @@ Once downloaded, navigate to ~Downloads and run the following command:
 Below is the package structure:
 ```
 .
-├── README.md
-├── chutes-and-ladders.iml
 ├── pom.xml
 └── src
     ├── main
-    │   ├── java
-    │   │   └── com
-    │   │       └── game
-    │   │           └── assignment
-    │   │               ├── Board.java
-    │   │               ├── ChutesAndLadders.java
-    │   │               ├── Game.java
-    │   │               ├── LeaderBoard.java
-    │   │               ├── Player.java
-    │   │               └── Spinner.java
-    │   └── resources
+    │   └── java
+    │       └── com
+    │           └── game
+    │               └── assignment
+    │                   ├── Board.java
+    │                   ├── ChutesAndLadders.java
+    │                   ├── Game.java
+    │                   ├── LeaderBoard.java
+    │                   ├── Player.java
+    │                   └── Spinner.java
     └── test
         └── java
             └── com
                 └── game
                     └── assignment
+                        ├── GameTest.java
                         └── SpinnerTest.java
 ```
 
