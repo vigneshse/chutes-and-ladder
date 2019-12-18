@@ -37,4 +37,13 @@ public class GameTest {
     }
 
 
+    @Test
+    public void validCase_GameFinishesWithWinner(){
+        players = new Player[2];
+        players[0] = new Player("Player1");
+        players[1] = new Player("Player2");
+        game = new Game(players);
+        game.play();
+    }
+
 }
